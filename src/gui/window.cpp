@@ -30,6 +30,7 @@ Window::~Window() {
     if (view) {
         delete view;
     }
+    SDL_Quit();
 }
 
 void Window::attach_view(View* view) {

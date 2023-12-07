@@ -29,3 +29,7 @@ $(TARGET): $(OBJ)
 .PHONY: clean
 clean:
 	rm -rf $(OBJ) $(TARGET) $(shell find . -name "*.dSYM")
+
+.PHONY: run
+run: $(TARGET)
+	./$(TARGET)
