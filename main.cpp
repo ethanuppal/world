@@ -1,19 +1,10 @@
-#include <SDL.h>
 #include <iostream>
+#include "sdl_config.h"
 
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 600;
+#define WINDOW_WIDTH 400
+#define WINDOW_HEIGHT 400
 
-int main(int arc, const char** argv) {
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        std::cout << "sdl initialization failed: " << SDL_GetError() << '\n';
-    } else {
-        SDL_CreateWindow("SDL2 Demo", SDL_WINDOWPOS_CENTERED,
-            SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT,
-            SDL_WINDOW_SHOWN);
-
-        SDL_Delay(5000);
-    }
-
-    return 0;
+int main() {
+    SDLConfig sdl_config("My Window", WINDOW_WIDTH, WINDOW_HEIGHT);
+    sdl_config.delay(5000);
 }
