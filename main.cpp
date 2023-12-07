@@ -6,5 +6,5 @@
 
 int main() {
     SDLConfig sdl_config("My Window", WINDOW_WIDTH, WINDOW_HEIGHT);
-    sdl_config.delay(5000);
+    sdl_config.event_loop();
 }
