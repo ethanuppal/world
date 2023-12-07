@@ -1,5 +1,7 @@
 // Copyright (C) 2023 Ethan Uppal. All rights reserved.
 
+#pragma once
+
 #include <iostream>
 
 /** A wrapper around output logging. */

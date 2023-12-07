@@ -20,7 +20,7 @@ SRC			:= main.cpp $(shell find $(SRCDIR) -name "*.cpp" -type f)
 OBJ			:= $(SRC:.cpp=.o)
 
 $(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $^ -o $@
 
 %.o: %.cpp
 	@echo 'Compiling $@'
