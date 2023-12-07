@@ -4,20 +4,30 @@
 
 #include <SDL.h>
 #include <vector>
-#include <set>
+#include <unordered_set>
 #include "object.h"
 
 class Scene {
+    /** Represents a drawing layer for objects. */
     using LayerSet = std::unordered_set<Object*>;
 
-    LayerSet foreground;
+    /** Objects in the background. */
     LayerSet background;
+
+    /** Objects in the foreground. */
+    LayerSet foreground;
+
+    /** The x-coordinate of the origin. */
+    double ox;
+
+    /** The y-coordinate of the origin. */
+    double oy;
 
 public:
     /** The layer of an object. */
     enum class Layer { foreground, background };
 
-    /** Constructs an empty scene. */
+    /** Constructs an empty scene centered at (0, 0). */
     Scene();
 
     /** Inserts a new `object` into the scene at the specified `layer`. */
@@ -28,4 +38,8 @@ public:
 
     /** Draws the scene in the given renderer. */
     void draw(SDL_Renderer* renderer);
+
+    void set_origin(double ox, double oy);
+
+    void translate(double dx, double dy);
 };

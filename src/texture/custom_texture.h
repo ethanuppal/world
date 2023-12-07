@@ -11,5 +11,6 @@ class CustomTexture final : public Texture {
 public:
     CustomTexture(Shader shader);
 
-    void draw(SDL_Renderer* renderer, Geometry* geo) override;
+    void draw(SDL_Renderer* renderer, Geometry* geo, double dx,
+        double dy) override;
 };

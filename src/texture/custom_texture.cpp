@@ -4,6 +4,7 @@
 
 CustomTexture::CustomTexture(Shader shader): shader(shader) {}
 
-void CustomTexture::draw(SDL_Renderer* renderer, Geometry* geo) {
-    shader(renderer, geo);
+void CustomTexture::draw(SDL_Renderer* renderer, Geometry* geo, double dx,
+    double dy) {
+    shader(renderer, geo, dx, dy);
 }

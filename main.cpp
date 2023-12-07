@@ -9,6 +9,10 @@ int main() {
     Window window("World", WINDOW_WIDTH, WINDOW_HEIGHT);
 
     Scene* scene = new Scene();
+    scene->add(new Block(0, 0, 50, 50, 255, 0, 0, 255),
+        Scene::Layer::background);
+    scene->translate(-50, -50);
+
     WorldView* view = new WorldView(scene);
     window.attach_view(view);
 

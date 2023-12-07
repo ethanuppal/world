@@ -14,6 +14,7 @@ public:
     /** Constructs a new object with geometry `geo` and texture `texture`. */
     Object(Geometry* geo, Texture* texture);
 
-    /** Draws the object with the given `renderer`. */
-    void draw(SDL_Renderer* renderer);
+    /** Draws the object with the given `renderer` from the given origin (`ox`,
+     * `oy`). */
+    void draw(SDL_Renderer* renderer, double ox, double oy);
 };

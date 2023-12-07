@@ -7,12 +7,13 @@
 MonoTexture::MonoTexture(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
     : r(r), g(g), b(b), a(a) {}
 
-void MonoTexture::draw(SDL_Renderer* renderer, Geometry* geo) {
+void MonoTexture::draw(SDL_Renderer* renderer, Geometry* geo, double dx,
+    double dy) {
     if (geo->type() == Geometry::Type::rect) {
         Rect* rect = static_cast<Rect*>(geo);
         SDL_Rect sdl_rect;
-        sdl_rect.x = rect->x;
-        sdl_rect.y = rect->y;
+        sdl_rect.x = rect->x + dx;
+        sdl_rect.y = rect->y + dy;
         sdl_rect.w = rect->w;
         sdl_rect.h = rect->h;
 
