@@ -4,10 +4,14 @@
 
 #include <SDL.h>
 #include "gui/view.h"
+#include "world/scene.h"
 
 class WorldView final : public View {
+    Scene* scene;
+
 public:
-    WorldView();
+    /** Creates a new world view visualizing `scene`. */
+    WorldView(Scene* scene);
     ~WorldView() override;
 
     void on_event(SDL_Event event) override;
