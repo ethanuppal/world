@@ -7,11 +7,14 @@
 #include "world/scene.h"
 #include "util/keyboard.h"
 #include "world/objects/robot_object.h"
+#include "sim/simulator.h"
 
 class WorldView final : public View {
     Scene* scene;
     Keyboard* keyboard;
     RobotObject* robot;
+    Robot* user;
+    Simulator* simulator;
 
     void setup();
     void update(double dtime);

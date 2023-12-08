@@ -15,5 +15,5 @@ public:
 
     const std::vector<SensorInterface*>& sensors() const override;
 
-    void update() override;
+    void update(double dtime) override;
 };

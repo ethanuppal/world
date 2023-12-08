@@ -14,4 +14,4 @@ const std::vector<SensorInterface*>& MyRobot::sensors() const {
     return sensors_;
 }
 
-void MyRobot::update() {}
+void MyRobot::update(double dtime) {}

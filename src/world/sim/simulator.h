@@ -21,8 +21,10 @@ public:
      */
     Simulator(Scene* scene, RobotObject* robot_object, Robot* robot);
 
+    ~Simulator();
+
     /**
      * Performs one step of the simulation.
      */
-    void step();
+    void step(double dtime);
 };

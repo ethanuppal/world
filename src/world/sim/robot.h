@@ -11,6 +11,7 @@ public:
     /** Retrieves the sensors of the robot. */
     virtual const std::vector<SensorInterface*>& sensors() const = 0;
 
-    /** Runs the software of the robot. */
-    virtual void update() = 0;
+    /** Runs the software of the robot after a time interval `dtime` has
+     * elapsed. */
+    virtual void update(double dtime) = 0;
 };

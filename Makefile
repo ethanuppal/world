@@ -10,8 +10,8 @@ CDEBUG		:= -g
 CRELEASE	:= -O2 -DRELEASE_BUILD
 TARGET		:= main
 
-# CFLAGS 		+= $(CRELEASE)
-CFLAGS 		+= $(CDEBUG)
+CFLAGS 		+= $(CRELEASE)
+# CFLAGS 		+= $(CDEBUG)
 
 # use SDL
 CFLAGS		+= $(shell sdl2-config --cflags --libs)

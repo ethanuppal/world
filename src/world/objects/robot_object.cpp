@@ -42,6 +42,14 @@ double RobotObject::center_y() const {
     return pos()->y;
 }
 
+double RobotObject::report_vx() const {
+    return vx;
+}
+
+double RobotObject::report_vy() const {
+    return vy;
+}
+
 void RobotObject::update(Scene& scene, double dtime) {
     assert_inv(scene);
 

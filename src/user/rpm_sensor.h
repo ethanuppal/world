@@ -6,12 +6,12 @@
 #include "world/sim/sensor.h"
 
 struct RPMData {
-    double dleft;
-    double dright;
+    double dx;
+    double dy;
 };
 
 class RPMSensor final : public Sensor<RPMData> {
-    Uint64 ticks;
+    Uint64 last;
 
     void measure(RobotObject& robot, Scene& scene) override;
 

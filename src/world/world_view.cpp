@@ -3,18 +3,22 @@
 #include "util/logger.h"
 #include "world_view.h"
 #include "world.h"
+#include "user/myrobot.h"
 
 #define FORCE 100
 
 WorldView::WorldView()
     : scene(new Scene()),
       keyboard(new Keyboard()),
-      robot(new RobotObject(0, 0, 50, 0, 255, 0, 255)) {
+      robot(new RobotObject(0, 0, 50, 0, 255, 0, 255)),
+      user(new MyRobot()) {
+    simulator = new Simulator(scene, robot, user);
     setup();
 }
+
 WorldView::~WorldView() {
-    delete scene;
     delete keyboard;
+    delete simulator;
 }
 
 #define ENCL_W 400
@@ -68,7 +72,7 @@ void WorldView::update(double dtime) {
 
     robot->apply_force(fx * dtime, fy * dtime);
 
-    scene->update(dtime);
+    simulator->step(dtime);
 }
 
 void WorldView::on_event(const SDL_Event& event) {
