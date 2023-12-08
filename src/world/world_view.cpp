@@ -54,6 +54,8 @@ void WorldView::draw(SDL_Renderer* renderer, const SDL_Rect* frame,
     double dtime) {
     // update scene
     update(dtime);
+
+    // center robot on screen
     scene->set_origin(robot->center_x() - frame->w / 2,
         robot->center_y() - frame->h / 2);
 
