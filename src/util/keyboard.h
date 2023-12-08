@@ -9,8 +9,12 @@ class Keyboard final {
     std::unordered_map<SDL_Keycode, bool> states;
 
 public:
+    /** Constructs a new keyboard tracker. */
     Keyboard();
 
+    /** Updates the keyboard with a new event given by `key_event`. It does not
+     * necessarily have to be pre-checked to be a key-related event because the
+     * internals will handle that. */
     void update(const SDL_Event& key_event);
 
     /** Returns whether the key represented by the keycode `code` is currently

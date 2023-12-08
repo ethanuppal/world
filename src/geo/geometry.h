@@ -5,7 +5,7 @@
 struct Rect;
 struct Circle;
 
-/** The geometry of an object. Can be one of a limited types, see
+/** The geometry of an object. Can be one of a couple of limited types, see
  * `Geometry::Type`. */
 class Geometry {
     /**

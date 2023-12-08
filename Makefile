@@ -7,7 +7,7 @@ CC			:= $(shell which /opt/homebrew/bin/g++-13 || \
 					   which g++ || which clang)
 CFLAGS		:= -std=c++17 -pedantic -Wall -Wextra -I $(INCLUDEDIR)
 CDEBUG		:= -g
-CRELEASE	:= -O2
+CRELEASE	:= -O2 -DRELEASE_BUILD
 TARGET		:= main
 
 # CFLAGS 		+= $(CRELEASE)

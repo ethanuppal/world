@@ -6,12 +6,12 @@
 #include "gui/view.h"
 #include "world/scene.h"
 #include "util/keyboard.h"
-#include "world/objects/robot.h"
+#include "world/objects/robot_object.h"
 
 class WorldView final : public View {
     Scene* scene;
     Keyboard* keyboard;
-    Robot* robot;
+    RobotObject* robot;
 
     void setup();
     void update(double dtime);

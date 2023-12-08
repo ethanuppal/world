@@ -22,8 +22,11 @@ bool Geometry::circle_circle_overlaps_with(const Circle* circle1,
 // https://stackoverflow.com/questions/401847/circle-rectangle-collision-detection-intersection
 bool Geometry::rect_circle_overlaps_with(const Rect* rect,
     const Circle* circle) {
-    double circ_dx = abs(rect->x - circle->x);
-    double circ_dy = abs(rect->y - circle->y);
+    double mid_x = rect->x + rect->w / 2;
+    double mid_y = rect->y + rect->h / 2;
+
+    double circ_dx = abs(mid_x - circle->x);
+    double circ_dy = abs(mid_y - circle->y);
 
     if (circ_dx > (rect->w / 2 + circle->r)) {
         return false;

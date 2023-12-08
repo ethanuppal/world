@@ -4,6 +4,10 @@
 
 Scene::Scene(): ox(0), oy(0) {}
 
+const std::unordered_set<Object*>& Scene::surroundings() const {
+    return foreground;
+}
+
 void Scene::add(Object* object, Layer layer) {
     switch (layer) {
         case Layer::background:
@@ -34,6 +38,17 @@ void Scene::change_layer(Object* object, Layer layer) {
     }
 }
 
+// update cycle
+void Scene::update(double dtime) {
+    for (Object* object: background) {
+        object->update(*this, dtime);
+    }
+    for (Object* object: foreground) {
+        object->update(*this, dtime);
+    }
+}
+
+// draw cycle
 void Scene::draw(SDL_Renderer* renderer) {
     for (Object* object: background) {
         object->draw(renderer, ox, oy);

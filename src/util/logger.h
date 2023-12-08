@@ -22,7 +22,9 @@ public:
     /** Logs `val`. */
     template<typename T>
     Logger& operator<<(T val) {
+#ifndef RELEASE_BUILD
         out << val;
+#endif
         return *this;
     }
 };

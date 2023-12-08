@@ -4,12 +4,12 @@
 #include "world_view.h"
 #include "world.h"
 
-#define SPEED 20
+#define FORCE 100
 
 WorldView::WorldView()
     : scene(new Scene()),
       keyboard(new Keyboard()),
-      robot(new Robot(0, 0, 50, 0, 255, 0, 255)) {
+      robot(new RobotObject(0, 0, 50, 0, 255, 0, 255)) {
     setup();
 }
 WorldView::~WorldView() {
@@ -17,33 +17,58 @@ WorldView::~WorldView() {
     delete keyboard;
 }
 
+#define ENCL_W 400
+#define ENCL_H 400
+#define WALL_S 25
+
 void WorldView::setup() {
-    scene->add(new Block(0, 0, 50, 50, 255, 0, 0, 255),
-        Scene::Layer::background);
+    // add robot
     scene->add(robot, Scene::Layer::foreground);
+
+    // mark play area
+    scene->add(new Block(-ENCL_W / 2, -ENCL_H / 2, ENCL_W, ENCL_H, 255, 255,
+                   255, 255),
+        Scene::Layer::background);
+
+    // add walls
+    // left wall
+    scene->add(new Block(-ENCL_W / 2 - WALL_S, -ENCL_H / 2 - WALL_S, WALL_S,
+                   ENCL_H + WALL_S * 2, 255, 0, 0, 255),
+        Scene::Layer::foreground);
+    // right wall
+    scene->add(new Block(ENCL_W / 2, -ENCL_H / 2 - WALL_S, WALL_S,
+                   ENCL_H + WALL_S * 2, 255, 0, 0, 255),
+        Scene::Layer::foreground);
+    // top wall
+    scene->add(new Block(-ENCL_W / 2, -ENCL_H / 2 - WALL_S, ENCL_W, WALL_S, 255,
+                   0, 0, 255),
+        Scene::Layer::foreground);
+    // bottom wall
+    scene->add(new Block(-ENCL_W / 2, ENCL_H / 2, ENCL_W, WALL_S, 255, 0, 0,
+                   255),
+        Scene::Layer::foreground);
 }
 
 void WorldView::update(double dtime) {
-    double dx = 0;
-    double dy = 0;
+    double fx = 0;
+    double fy = 0;
 
     if (keyboard->query(SDLK_UP)) {
-        dy -= SPEED;
+        fy -= FORCE;
     }
     if (keyboard->query(SDLK_DOWN)) {
-        dy += SPEED;
+        fy += FORCE;
     }
     if (keyboard->query(SDLK_RIGHT)) {
-        dx += SPEED;
+        fx += FORCE;
     }
     if (keyboard->query(SDLK_LEFT)) {
-        dx -= SPEED;
+        fx -= FORCE;
     }
 
-    dx *= dtime;
-    dy *= dtime;
+    robot->apply_force(fx * dtime, fy * dtime);
 
-    robot->attempt_move(dx, dy, *scene);
+    scene->update(dtime);
 }
 
 void WorldView::on_event(const SDL_Event& event) {

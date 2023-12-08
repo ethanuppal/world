@@ -30,11 +30,18 @@ public:
     /** Constructs an empty scene centered at (0, 0). */
     Scene();
 
+    /** The interactable object of the scene. */
+    const std::unordered_set<Object*>& surroundings() const;
+
     /** Inserts a new `object` into the scene at the specified `layer`. */
     void add(Object* object, Layer layer);
 
     /** Moves an `object` in the scene to a new `layer`. */
     void change_layer(Object* object, Layer layer);
+
+    /** Performs a scene-wide update, broadcasting that a time interval `dtime`
+     * has elapsed. */
+    void update(double dtime);
 
     /** Draws the scene in the given renderer. */
     void draw(SDL_Renderer* renderer);
