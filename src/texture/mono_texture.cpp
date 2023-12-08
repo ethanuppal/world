@@ -22,6 +22,7 @@ void MonoTexture::draw(SDL_Renderer* renderer, Geometry* geo, double dx,
             SDL_RenderDrawRect(renderer, &sdl_rect);
             SDL_SetRenderDrawColor(renderer, r, g, b, a);
             SDL_RenderFillRect(renderer, &sdl_rect);
+
             break;
         }
         case Geometry::Type::circle: {
@@ -35,13 +36,13 @@ void MonoTexture::draw(SDL_Renderer* renderer, Geometry* geo, double dx,
             int max_y = (int)(circle->y + circle->r);
 
             SDL_SetRenderDrawColor(renderer, r, g, b, a);
-            int disty = -(int)circle->r;
+            int ydist = -(int)circle->r;
             for (int y = min_y; y <= max_y; y++) {
-                int xdist = (int)sqrt(circle->r * circle->r - disty * disty);
+                int xdist = (int)sqrt(circle->r * circle->r - ydist * ydist);
                 int x1 = circle->x - xdist + dx;
                 int x2 = circle->x + xdist + dx;
                 SDL_RenderDrawLine(renderer, x1, y + dy, x2, y + dy);
-                disty++;
+                ydist++;
             }
 
             break;
