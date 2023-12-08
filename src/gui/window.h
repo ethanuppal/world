@@ -10,11 +10,8 @@
 
 /** A wrapper around an SDL window. */
 class Window {
-    /** The width of the window. */
-    size_t width;
-
-    /** The height of the window. */
-    size_t height;
+    /** The dimensions of the window. */
+    SDL_Rect dimensions;
 
     /** The SDL window. */
     SDL_Window* window;
@@ -52,6 +49,6 @@ public:
     /** Invokes `SDL_Delay` with the given milliseconds delay `ms`. */
     void delay(uint32_t ms);
 
-    /** Returns the dimensions of the window frame as an `SDL_Rect`. */
-    SDL_Rect frame_rect();
+    /** Returns the window frame as an `SDL_Rect`. */
+    const SDL_Rect* frame() const;
 };

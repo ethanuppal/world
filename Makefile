@@ -18,17 +18,20 @@ CFLAGS		+= $(shell sdl2-config --cflags --libs)
 
 SRC			:= main.cpp $(shell find $(SRCDIR) -name "*.cpp" -type f)
 OBJ			:= $(SRC:.cpp=.o)
+DEPS 		:= $(OBJS:.o=.d) 
 
 $(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $@
 
 %.o: %.cpp
 	@echo 'Compiling $@'
-	$(CC) $(CFLAGS) $< -c -o $@
+	$(CC) $(CFLAGS) -MMD -MP $< -c -o $@
+
+-include $(DEPS)
 
 .PHONY: clean
 clean:
-	rm -rf $(OBJ) $(TARGET) $(shell find . -name "*.dSYM")
+	rm -rf $(OBJ) $(TARGET) $(DEPS) $(shell find . -name "*.dSYM")
 
 .PHONY: run
 run: $(TARGET)

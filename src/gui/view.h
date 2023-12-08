@@ -8,9 +8,16 @@ class View {
 public:
     virtual ~View() = default;
 
-    /** Handle a new `event`. */
-    virtual void on_event(SDL_Event event) = 0;
+    /** Handle a new `event`. Must override. */
+    virtual void on_event(const SDL_Event& event) = 0;
 
-    /** Draw the view's contents to `renderer`. */
-    virtual void draw(SDL_Renderer* renderer, SDL_Rect frame) = 0;
+    /**
+     * Draw the view's contents to `renderer`. Must override.
+     *
+     * @param The window the view belongs to.
+     * @param renderer The renderer for the window.
+     * @param dtime The time elapsed since the view was last rendered.
+     */
+    virtual void draw(SDL_Renderer* renderer, const SDL_Rect* frame,
+        double dtime) = 0;
 };

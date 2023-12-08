@@ -7,6 +7,7 @@
 #include "texture/texture.h"
 
 class Object {
+protected:
     Geometry* geo;
     Texture* texture;
 

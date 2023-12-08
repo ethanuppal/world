@@ -3,8 +3,12 @@
 #include <cassert>
 #include "window.h"
 
-Window::Window(std::string name, size_t width, size_t height)
-    : width(width), height(height), view(nullptr) {
+Window::Window(std::string name, size_t width, size_t height): view(nullptr) {
+    dimensions.x = 0;
+    dimensions.y = 0;
+    dimensions.w = (int)width;
+    dimensions.h = (int)height;
+
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
         Log << "SDL initialization failed: " << SDL_GetError() << '\n';
         exit(1);
@@ -42,6 +46,7 @@ void Window::present() {
     assert(view);
     SDL_Event event;
     bool quit_requested = false;
+    Uint64 start_timestamp = SDL_GetPerformanceCounter();
     do {
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
@@ -50,8 +55,12 @@ void Window::present() {
             }
             view->on_event(event);
         }
-        view->draw(renderer, frame_rect());
+        Uint64 now_timestamp = SDL_GetPerformanceCounter();
+        double elapsed = (double)(now_timestamp - start_timestamp)
+                         / (double)SDL_GetPerformanceFrequency();
+        view->draw(renderer, frame(), elapsed);
         SDL_RenderPresent(renderer);
+        start_timestamp = now_timestamp;
     } while (!quit_requested);
 }
 
@@ -59,11 +68,6 @@ void Window::delay(uint32_t ms) {
     SDL_Delay((Uint32)ms);
 }
 
-SDL_Rect Window::frame_rect() {
-    SDL_Rect frame;
-    frame.x = 0;
-    frame.y = 0;
-    frame.w = (int)width;
-    frame.h = (int)height;
-    return frame;
+const SDL_Rect* Window::frame() const {
+    return &dimensions;
 }

@@ -5,15 +5,23 @@
 #include <SDL.h>
 #include "gui/view.h"
 #include "world/scene.h"
+#include "util/keyboard.h"
+#include "world/objects/robot.h"
 
 class WorldView final : public View {
     Scene* scene;
+    Keyboard* keyboard;
+    Robot* robot;
+
+    void setup();
+    void update(double dtime);
 
 public:
-    /** Creates a new world view visualizing `scene`. */
-    WorldView(Scene* scene);
+    /** Creates a new world view. */
+    WorldView();
     ~WorldView() override;
 
-    void on_event(SDL_Event event) override;
-    void draw(SDL_Renderer* renderer, SDL_Rect frame) override;
+    void on_event(const SDL_Event& event) override;
+    void draw(SDL_Renderer* renderer, const SDL_Rect* frame,
+        double dtime) override;
 };
